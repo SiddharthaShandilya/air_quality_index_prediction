@@ -67,13 +67,13 @@ def met_data(month, year):
     # removing the columns with null values
     for a in range (len(finald)):
         
-        finald[a].pop(13)
-        finald[a].pop(12)
-        finald[a].pop(11)
-        finald[a].pop(10)
-        finald[a].pop(9)        
-        finald[a].pop(6) # removing 6th column form the dataset
-        finald[a].pop(0) # removing column 1st 
+        finald[a].pop(6) # now that we have poped 6th first so the entire column alignment needs to be changed accordingly
+        finald[a].pop(13)# 15th columns
+        finald[a].pop(12) # 14th column
+        finald[a].pop(11) # 13th column
+        finald[a].pop(10) # 12th column
+        finald[a].pop(9) # 11th column
+        finald[a].pop(0) # removing column 1st because removing 6th column doesnot affect 0th position
         
     return finald
 
@@ -109,7 +109,7 @@ if __name__ == "__main__":
         with open('data/Real-Data/real_'+ str(year) + '.csv','w') as csvfile:
             wr = csv.writer(csvfile, dialect='excel')
             wr.writerow(
-                ['T','TM', 'SLP','H','VV','V','VM','PM2.5'])   
+                ['T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5'])   
         for month in range(1,13):
             temp = met_data(month, year)
             final_data = final_data + temp
