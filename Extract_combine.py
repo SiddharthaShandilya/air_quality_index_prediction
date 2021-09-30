@@ -139,8 +139,10 @@ if __name__ == "__main__":
     data_2014 = data_combine(2014, 600)
     data_2015 = data_combine(2015, 600)
     data_2016 = data_combine(2016, 600)
+    data_2017 = data_combine(2017, 600)
+    data_2018 = data_combine(2018, 600)
      
-    total=data_2013+data_2014+data_2015+data_2016
+    total=data_2013+data_2014+data_2015+data_2016+data_2017+data_2018
     
     with open('Data/Real-Data/Real_Combine.csv', 'w') as csvfile:
         wr = csv.writer(csvfile, dialect='excel')
