@@ -1,1 +1,18 @@
 # all the locations of different directories will be here
+artifacts: 
+  artifacts_dir: artifacts
+  data_local_dir: data
+  aqi_dir: AQI
+  html_data_dir: html-Data
+  real_data_dir: Real-Data
+
+  model_dir: model
+  decision_tree_reg: decision_tree_regression.pk1
+  lasso_reg: lasso_regression.pk1
+  ridge_reg: ridge_regression.pk1
+  linear_reg: linear_regression.pk1
+  random_forest_reg: random_forest_regression.pk1
+  xgboost_reg: xgboost_regression.pk1
+  
+  reports_dir: reports_dir
+  scores: scores.json 
