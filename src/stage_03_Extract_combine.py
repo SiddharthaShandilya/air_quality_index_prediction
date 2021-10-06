@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 import os
 import csv
 
-from aqt_data_processing import avg_data
+from stage_02_aqt_data_processing import avg_data
 import requests
 import sys 
 from bs4 import BeautifulSoup
