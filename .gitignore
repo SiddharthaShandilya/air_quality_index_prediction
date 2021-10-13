@@ -129,3 +129,5 @@ dmypy.json
 .pyre/
 __pychache__
 .ipynb_checkpoints
+src.egg-info
+001_AQT_PROJECT_workspace.code-workspace
