@@ -29,7 +29,7 @@ def met_data(month, year):
     file_html=open('artifacts/data/Html_Data/{}/{}.html'.format(year,month),'rb')
     plain_text = file_html.read()
 
-    print("-"*10 + " META_DATA" + "-"*10)
+    #print("-"*10 + " META_DATA" + "-"*10)
     tempd=[]
     finald=[]
     
@@ -45,9 +45,7 @@ def met_data(month, year):
     #print(type(tempd))
                 
     rows = len(tempd)/15
-    
-    
-    
+  
     for times in range(round(rows)):
         newtempd=[]
         for i in range(15):
@@ -57,13 +55,9 @@ def met_data(month, year):
         finald.append(newtempd)
         #print(finald)
         
-        
-        
     length = len(finald)
 
-    print(" length of finald = > {} ".format(length))
-    print( " month = > {} || year => {}".format(month, year))
-    
+        
     finald.pop(length-1)  # removing the last row which contains mean and mode
 
     finald.pop(0)  # removing the first row which contains all the columns name
@@ -78,7 +72,6 @@ def met_data(month, year):
         finald[a].pop(11) # 13th column
         finald[a].pop(10) # 12th column
         finald[a].pop(9) # 11th column
-        finald[a].pop(3) # 4th column is not present
         finald[a].pop(0) # removing column 1st because removing 6th column does not affect 0th position
     
     #print(finald)    
@@ -96,16 +89,11 @@ def data_combine(year, cs):
     
     for a in pd.read_csv('artifacts/data/Real-Data/real_'+str(year)+'.csv',chunksize=cs):
         
-        print("-"*30 + " data_combine" + "-"*30)
         print(a)
-        print("-"*30 + " data_combine" + "-"*30)
-    
+
         df = pd.DataFrame(data=a)
         mylist = df.values.tolist()
-    
-    print("-"*30 + " data_combine_my_list" + "-"*30)
-    print(mylist)   
-    print("-"*30 + " data_combine_my_list" + "-"*30)
+        
     return mylist
 
 #_____________________________________________________________________________
@@ -118,7 +106,7 @@ if __name__ == "__main__":
     
     if not os.path.exists('artifacts/data/Real-Data/'):
         os.makedirs('artifacts/data/Real-Data/')
-    for year in range(2013, 2017):
+    for year in range(2013, 2019):
         final_data=[]
         with open('artifacts/data/Real-Data/real_'+ str(year) + '.csv','w') as csvfile:
             wr = csv.writer(csvfile, dialect='excel')
@@ -139,7 +127,7 @@ if __name__ == "__main__":
 
 
             
-        with open('artifacts/data/Real-Data/real_'+ str(year) + '.csv', 'a') as csvfile:
+        with open('artifacts/data/Real-Data/real_{}.csv'.format(year), 'a') as csvfile:
 
             wr = csv.writer(csvfile, dialect='excel')
             for row in final_data:
@@ -167,9 +155,9 @@ if __name__ == "__main__":
      
     total=data_2013+data_2014+data_2015+data_2016 #+data_2017+data_2018
     
-    #print("-"*20 + " total " + "-"*20)
-    #print(total)  
-    #print("-"*20 + " total " + "-"*20)    
+    print("-"*20 + " data_2013 " + "-"*20)
+    print(data_2013)  
+    print("-"*20 + " data_2013 " + "-"*20)    
 
     with open('artifacts/data/Real-Data/Real_Combine.csv', 'w') as csvfile:
         wr = csv.writer(csvfile, dialect='excel')

@@ -7,15 +7,15 @@ stages:
       md5: ae5104776182ddbc1e28669891487280
       size: 520
     - path: src/stage_01_retrieve_html.py
-      md5: 9b4c055c32a8dfeda43e2027969359aa
-      size: 1224
+      md5: 41db257517af48bd9f9cd5af930b21f0
+      size: 1310
     - path: src/utils/all_utils.py
-      md5: 12535b33b82c751713356c5666358a45
-      size: 1963
+      md5: 6d2014117f6c3328aca019e7f4ec5179
+      size: 1863
     outs:
     - path: artifacts/data/Html_Data/
-      md5: ed4bf040188a82abbd95be36a1e2a42e.dir
-      size: 9696314
+      md5: 81daa2d0f006ddf8b199c5384134d77e.dir
+      size: 9863848
       nfiles: 72
   Extracting and combining data:
     cmd: python src/stage_02_Extract_combine.py
@@ -25,20 +25,20 @@ stages:
       size: 1415058
       nfiles: 6
     - path: artifacts/data/Html_Data
-      md5: ed4bf040188a82abbd95be36a1e2a42e.dir
-      size: 9696314
+      md5: 81daa2d0f006ddf8b199c5384134d77e.dir
+      size: 9863848
       nfiles: 72
     - path: config/config.yaml
       md5: ae5104776182ddbc1e28669891487280
       size: 520
     - path: src/stage_02_Extract_combine.py
-      md5: 3cfbeb791384b58faacb0830f4d33437
-      size: 5050
+      md5: 6dc266c38fd7e7f4970ea3dfb7c7db52
+      size: 5180
     - path: src/utils/all_utils.py
-      md5: 12535b33b82c751713356c5666358a45
-      size: 1963
+      md5: 6d2014117f6c3328aca019e7f4ec5179
+      size: 1863
     outs:
     - path: artifacts/data/Real-Data/
-      md5: b8c3820a078d9f46d35c79f4c8038022.dir
-      size: 217
+      md5: 065298efb6b17f4cd79847df9020d6ff.dir
+      size: 93931
       nfiles: 7

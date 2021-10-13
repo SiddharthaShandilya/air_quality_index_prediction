@@ -11,10 +11,10 @@ def retrieve_html():
         for month in range(1,13):
             
             if month<10:
-                url="https://en.tutiempo.net/climate/0{}-{}/ws-432950.html".format(month, year)
+                url="https://en.tutiempo.net/climate/0{}-{}/ws-421820.html".format(month, year)
                 
             else:
-                 url="https://en.tutiempo.net/climate/{}-{}/ws-432950.html".format(month, year)
+                 url="https://en.tutiempo.net/climate/{}-{}/ws-421820.html".format(month, year)
                  
             text = requests.get(url)
             text_utf = text.text.encode('utf-8')
@@ -27,6 +27,8 @@ def retrieve_html():
             with open("artifacts/data/Html_Data/{}/{}.html".format(year,month),"wb") as output:
                 
                 output.write(text_utf)
+
+            print("artifacts/data/Html_Data {} / {} created".format( year, month))
                   
     sys.stdout.flush()
     
