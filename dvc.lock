@@ -38,6 +38,7 @@ stages:
       md5: 12535b33b82c751713356c5666358a45
       size: 1963
     outs:
-    - path: artifacts/data/Real-Data/Real_Combine.csv
-      md5: f39e482cecfbb5f47e5d95a6fb02c151
-      size: 31
+    - path: artifacts/data/Real-Data/
+      md5: b8c3820a078d9f46d35c79f4c8038022.dir
+      size: 217
+      nfiles: 7

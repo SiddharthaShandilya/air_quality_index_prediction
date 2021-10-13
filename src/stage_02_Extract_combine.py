@@ -78,6 +78,7 @@ def met_data(month, year):
         finald[a].pop(11) # 13th column
         finald[a].pop(10) # 12th column
         finald[a].pop(9) # 11th column
+        finald[a].pop(3) # 4th column is not present
         finald[a].pop(0) # removing column 1st because removing 6th column does not affect 0th position
     
     #print(finald)    
@@ -95,12 +96,16 @@ def data_combine(year, cs):
     
     for a in pd.read_csv('artifacts/data/Real-Data/real_'+str(year)+'.csv',chunksize=cs):
         
+        print("-"*30 + " data_combine" + "-"*30)
+        print(a)
+        print("-"*30 + " data_combine" + "-"*30)
+    
         df = pd.DataFrame(data=a)
         mylist = df.values.tolist()
     
-    #print("-"*30)
-    #print(mylist)   
-    #print("-"*30)
+    print("-"*30 + " data_combine_my_list" + "-"*30)
+    print(mylist)   
+    print("-"*30 + " data_combine_my_list" + "-"*30)
     return mylist
 
 #_____________________________________________________________________________
@@ -113,50 +118,59 @@ if __name__ == "__main__":
     
     if not os.path.exists('artifacts/data/Real-Data/'):
         os.makedirs('artifacts/data/Real-Data/')
-    for year in range(2013, 2019):
+    for year in range(2013, 2017):
         final_data=[]
         with open('artifacts/data/Real-Data/real_'+ str(year) + '.csv','w') as csvfile:
             wr = csv.writer(csvfile, dialect='excel')
             wr.writerow(
-                ['T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5'])   
+                ['T', 'TM', 'Tm', 'H', 'VV', 'V', 'VM', 'PM 2.5'])   
+        
         for month in range(1,13):
-            temp = met_data(month, year)
+            temp = met_data(month, year)         
             final_data = final_data + temp
         
-        
-        print("|"*50)
-        print(final_data)   
-        print("|"*50)
         pm = avg_data(year)
-        
+
         if len(pm) == '364':
             pm.insert(364,'_')
-            
-        
+
         for i in range (len(final_data)-1):
             final_data[i].insert(8,pm[i])
+
+
             
-        with open('artifacts/data/Real-Data/real_{}.csv'.format(year), 'a') as csvfile:
+        with open('artifacts/data/Real-Data/real_'+ str(year) + '.csv', 'a') as csvfile:
+
             wr = csv.writer(csvfile, dialect='excel')
             for row in final_data:
                 flag = 0
                 for elem in row:
                     if elem == "" or elem == "-":
                         flag = 1
-                if flag != 1:
+                if flag == 1:
                     wr.writerow(row)
+                    print("-"*30 + " real_data_row" + "-"*30)
+                    print(row)
+                    print("-"*30 + " real_data_row" + "-"*30)
                        
                     
-                    
+    print("-"*30 + " real_data_wr.head" + "-"*30)
+    print(pd.read_csv("artifacts/data/Real-Data/real_{}.csv".format(year)))
+    print("-"*30 + " real_data_wr.head" + "-"*30)   
+
     data_2013 = data_combine(2013, 600)
     data_2014 = data_combine(2014, 600)
     data_2015 = data_combine(2015, 600)
     data_2016 = data_combine(2016, 600)
-    data_2017 = data_combine(2017, 600)
-    data_2018 = data_combine(2018, 600)
+    #data_2017 = data_combine(2017, 600)
+    #data_2018 = data_combine(2018, 600)
      
-    total=data_2013+data_2014+data_2015+data_2016+data_2017+data_2018
+    total=data_2013+data_2014+data_2015+data_2016 #+data_2017+data_2018
     
+    #print("-"*20 + " total " + "-"*20)
+    #print(total)  
+    #print("-"*20 + " total " + "-"*20)    
+
     with open('artifacts/data/Real-Data/Real_Combine.csv', 'w') as csvfile:
         wr = csv.writer(csvfile, dialect='excel')
         wr.writerow(
@@ -167,14 +181,6 @@ if __name__ == "__main__":
 
 df=pd.read_csv('artifacts/data/Real-Data/Real_Combine.csv')
 print(df.head())
-
-
-
-
-
-
-
-
 
 
 

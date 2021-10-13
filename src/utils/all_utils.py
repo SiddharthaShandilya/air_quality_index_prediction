@@ -62,8 +62,6 @@ def avg_data(year):
         temp_i=temp_i+1
         average.append(avg)
 
-    print("-"*20 + " avg data " + "-"*20)
-    print(average)
-    print("-"*20 + " avg data " + "-"*20)
+    
 
     return average

@@ -19,4 +19,4 @@ stages:
       - artifacts/data/AQI/
       - artifacts/data/Html_Data
     outs:
-      - artifacts/data/Real-Data/Real_Combine.csv
+      - artifacts/data/Real-Data/
