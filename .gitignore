@@ -141,3 +141,4 @@ src.egg-info
 # data processign file is shifted to src.utils.all_utils.py file
 src/stage_02_aqt_data_processing.py
 artifacts/data/Html_Data/
+artifacts/data/Real-Data
