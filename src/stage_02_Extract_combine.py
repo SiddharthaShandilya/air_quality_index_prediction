@@ -111,7 +111,7 @@ if __name__ == "__main__":
         with open('artifacts/data/Real-Data/real_'+ str(year) + '.csv','w') as csvfile:
             wr = csv.writer(csvfile, dialect='excel')
             wr.writerow(
-                ['T', 'TM', 'Tm', 'H', 'VV', 'V', 'VM', 'PM 2.5'])   
+                ['T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5'])   
         
         for month in range(1,13):
             temp = met_data(month, year)         
@@ -155,9 +155,7 @@ if __name__ == "__main__":
      
     total=data_2013+data_2014+data_2015+data_2016 #+data_2017+data_2018
     
-    print("-"*20 + " data_2013 " + "-"*20)
-    print(data_2013)  
-    print("-"*20 + " data_2013 " + "-"*20)    
+    
 
     with open('artifacts/data/Real-Data/Real_Combine.csv', 'w') as csvfile:
         wr = csv.writer(csvfile, dialect='excel')

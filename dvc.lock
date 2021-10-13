@@ -32,13 +32,13 @@ stages:
       md5: ae5104776182ddbc1e28669891487280
       size: 520
     - path: src/stage_02_Extract_combine.py
-      md5: 6dc266c38fd7e7f4970ea3dfb7c7db52
-      size: 5180
+      md5: 5dcff3e595c9957cd7738ca1cda12a07
+      size: 5199
     - path: src/utils/all_utils.py
       md5: 6d2014117f6c3328aca019e7f4ec5179
       size: 1863
     outs:
     - path: artifacts/data/Real-Data/
-      md5: 065298efb6b17f4cd79847df9020d6ff.dir
-      size: 93931
+      md5: 06659508e55a7638ed8e079fc20a56fc.dir
+      size: 97603
       nfiles: 7
