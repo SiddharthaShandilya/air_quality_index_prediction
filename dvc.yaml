@@ -1,0 +1,19 @@
+stages:
+  retrieve_html:
+    cmd: python src/stage_01_retrieve_html.py --config=config/config.yaml
+    deps:
+      - src/stage_01_retrieve_html.py
+      - src/utils/all_utils.py
+      - config/config.yaml
+    outs:
+      - artifacts/data/Html_Data
+
+  aqt_data_processing:
+    cmd: python src/stage_02_aqt_data_processing.py
+    deps:
+      - src/stage_02_aqt_data_processing.py
+      - src/utils/all_utils.py
+      - config/config.yaml
+      - artifacts/data/AQI
+    outs:
+      - artifacts/data/Html_Data
