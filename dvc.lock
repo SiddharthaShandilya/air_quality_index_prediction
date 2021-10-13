@@ -1,0 +1,43 @@
+schema: '2.0'
+stages:
+  retrieve_html:
+    cmd: python src/stage_01_retrieve_html.py
+    deps:
+    - path: config/config.yaml
+      md5: ae5104776182ddbc1e28669891487280
+      size: 520
+    - path: src/stage_01_retrieve_html.py
+      md5: 9b4c055c32a8dfeda43e2027969359aa
+      size: 1224
+    - path: src/utils/all_utils.py
+      md5: 12535b33b82c751713356c5666358a45
+      size: 1963
+    outs:
+    - path: artifacts/data/Html_Data/
+      md5: ed4bf040188a82abbd95be36a1e2a42e.dir
+      size: 9696314
+      nfiles: 72
+  Extracting and combining data:
+    cmd: python src/stage_02_Extract_combine.py
+    deps:
+    - path: artifacts/data/AQI/
+      md5: a2106931b548e5f3c31848138f32dda6.dir
+      size: 1415058
+      nfiles: 6
+    - path: artifacts/data/Html_Data
+      md5: ed4bf040188a82abbd95be36a1e2a42e.dir
+      size: 9696314
+      nfiles: 72
+    - path: config/config.yaml
+      md5: ae5104776182ddbc1e28669891487280
+      size: 520
+    - path: src/stage_02_Extract_combine.py
+      md5: 3cfbeb791384b58faacb0830f4d33437
+      size: 5050
+    - path: src/utils/all_utils.py
+      md5: 12535b33b82c751713356c5666358a45
+      size: 1963
+    outs:
+    - path: artifacts/data/Real-Data/Real_Combine.csv
+      md5: f39e482cecfbb5f47e5d95a6fb02c151
+      size: 31

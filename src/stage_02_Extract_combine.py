@@ -12,7 +12,8 @@ import matplotlib.pyplot as plt
 import os
 import csv
 
-from stage_02_aqt_data_processing import avg_data
+#from stage_02_aqt_data_processing import avg_data
+from src.utils.all_utils import avg_data
 import requests
 import sys 
 from bs4 import BeautifulSoup
@@ -25,9 +26,10 @@ from bs4 import BeautifulSoup
 
 
 def met_data(month, year):
-    file_html=open('data/Html_Data/{}/{}.html'.format(year,month),'rb')
+    file_html=open('artifacts/data/Html_Data/{}/{}.html'.format(year,month),'rb')
     plain_text = file_html.read()
-    
+
+    print("-"*10 + " META_DATA" + "-"*10)
     tempd=[]
     finald=[]
     
@@ -58,6 +60,9 @@ def met_data(month, year):
         
         
     length = len(finald)
+
+    print(" length of finald = > {} ".format(length))
+    print( " month = > {} || year => {}".format(month, year))
     
     finald.pop(length-1)  # removing the last row which contains mean and mode
 
@@ -73,8 +78,9 @@ def met_data(month, year):
         finald[a].pop(11) # 13th column
         finald[a].pop(10) # 12th column
         finald[a].pop(9) # 11th column
-        finald[a].pop(0) # removing column 1st because removing 6th column doesnot affect 0th position
-        
+        finald[a].pop(0) # removing column 1st because removing 6th column does not affect 0th position
+    
+    #print(finald)    
     return finald
 
 
@@ -87,11 +93,14 @@ def met_data(month, year):
 
 def data_combine(year, cs):
     
-    for a in pd.read_csv('data/Real-Data/real_'+str(year)+'.csv',chunksize=cs):
+    for a in pd.read_csv('artifacts/data/Real-Data/real_'+str(year)+'.csv',chunksize=cs):
         
         df = pd.DataFrame(data=a)
         mylist = df.values.tolist()
-        
+    
+    #print("-"*30)
+    #print(mylist)   
+    #print("-"*30)
     return mylist
 
 #_____________________________________________________________________________
@@ -102,18 +111,22 @@ def data_combine(year, cs):
 
 if __name__ == "__main__":
     
-    if not os.path.exists('data/Real-Data/'):
-        os.makedirs('data/Real-Data/')
+    if not os.path.exists('artifacts/data/Real-Data/'):
+        os.makedirs('artifacts/data/Real-Data/')
     for year in range(2013, 2019):
         final_data=[]
-        with open('data/Real-Data/real_'+ str(year) + '.csv','w') as csvfile:
+        with open('artifacts/data/Real-Data/real_'+ str(year) + '.csv','w') as csvfile:
             wr = csv.writer(csvfile, dialect='excel')
             wr.writerow(
                 ['T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5'])   
         for month in range(1,13):
             temp = met_data(month, year)
             final_data = final_data + temp
-            
+        
+        
+        print("|"*50)
+        print(final_data)   
+        print("|"*50)
         pm = avg_data(year)
         
         if len(pm) == '364':
@@ -123,7 +136,7 @@ if __name__ == "__main__":
         for i in range (len(final_data)-1):
             final_data[i].insert(8,pm[i])
             
-        with open('Data/Real-Data/real_{}.csv'.format(year), 'a') as csvfile:
+        with open('artifacts/data/Real-Data/real_{}.csv'.format(year), 'a') as csvfile:
             wr = csv.writer(csvfile, dialect='excel')
             for row in final_data:
                 flag = 0
@@ -144,7 +157,7 @@ if __name__ == "__main__":
      
     total=data_2013+data_2014+data_2015+data_2016+data_2017+data_2018
     
-    with open('Data/Real-Data/Real_Combine.csv', 'w') as csvfile:
+    with open('artifacts/data/Real-Data/Real_Combine.csv', 'w') as csvfile:
         wr = csv.writer(csvfile, dialect='excel')
         wr.writerow(
             ['T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5'])
@@ -152,7 +165,8 @@ if __name__ == "__main__":
         
 
 
-df=pd.read_csv('Data/Real-Data/Real_Combine.csv')
+df=pd.read_csv('artifacts/data/Real-Data/Real_Combine.csv')
+print(df.head())
 
 
 

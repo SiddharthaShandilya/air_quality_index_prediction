@@ -2,6 +2,7 @@ import os
 import time
 import requests
 import sys
+from src.utils.all_utils import *
 
 def retrieve_html():
     
@@ -18,12 +19,12 @@ def retrieve_html():
             text = requests.get(url)
             text_utf = text.text.encode('utf-8')
         
-            if not os.path.exists("C:/Users/gg415/OneDrive/Desktop/air_quality_index_prediction_krish_naik/data/Html_Data/{}".format(year)):
+            if not os.path.exists("artifacts/data/Html_Data/{}".format(year)):
                 
                         
-                os.makedirs("C:/Users/gg415/OneDrive/Desktop/air_quality_index_prediction_krish_naik/data/Html_Data/{}".format(year))
+                os.makedirs("artifacts/data/Html_Data/{}".format(year))
                 
-            with open("C:/Users/gg415/OneDrive/Desktop/air_quality_index_prediction_krish_naik/data/Html_Data/{}/{}.html".format(year,month),"wb") as output:
+            with open("artifacts/data/Html_Data/{}/{}.html".format(year,month),"wb") as output:
                 
                 output.write(text_utf)
                   
