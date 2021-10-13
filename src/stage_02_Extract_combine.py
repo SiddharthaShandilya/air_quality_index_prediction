@@ -147,7 +147,7 @@ if __name__ == "__main__":
                 for elem in row:
                     if elem == "" or elem == "-":
                         flag = 1
-                if flag == 1:
+                if flag != 1:
                     wr.writerow(row)
                     print("-"*30 + " real_data_row" + "-"*30)
                     print(row)
