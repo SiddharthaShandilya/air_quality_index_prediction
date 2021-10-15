@@ -33,4 +33,14 @@ stages:
     outs:
       - artifacts/reports_dir/graphs_dir/
 
+  Splitting_Data:
+    cmd: python src/stage_04_splitting_data.py --config config/config.yaml --params params.yaml
+    deps:
+      - src/stage_04_splitting_data.py
+      - artifacts/raw_data/Real-Data/
+      - src/utils/all_utils.py
+      - config/config.yaml
+    outs:
+      - artifacts/split_data_dir/
+
   
