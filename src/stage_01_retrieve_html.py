@@ -41,8 +41,7 @@ def retrieve_html(config_path):
             text_utf = text.text.encode('utf-8')
         
             if not os.path.exists("{}/{}".format(html_local_dir_path,year)):
-                
-                        
+                                       
                 os.makedirs("{}/{}".format(html_local_dir_path,year))
                 
             with open("{}/{}/{}.html".format(html_local_dir_path,year,month),"wb") as output:

@@ -1,5 +1,5 @@
 stages:
-  retrieve_html:
+  FETCHING_DATA:
     cmd: python src/stage_01_retrieve_html.py --config config/config.yaml
     deps:
       - src/stage_01_retrieve_html.py
@@ -13,6 +13,7 @@ stages:
     cmd: python src/stage_02_Extract_combine.py --config config/config.yaml
     deps:
       - src/stage_02_Extract_combine.py
+      - src/stage_01_retrieve_html.py
       - src/utils/all_utils.py
       - config/config.yaml
       #- artifacts/data/AQI/aqi2013.csv
@@ -20,5 +21,16 @@ stages:
       - artifacts/raw_data/Html_Data
     outs:
       - artifacts/raw_data/Real-Data/
+
+
+  Exploratory_Data_Analysis:
+    cmd: python src/stage_03_EDA.py --config config/config.yaml
+    deps:
+      - src/stage_03_EDA.py
+      - artifacts/raw_data/Real-Data/
+      - src/utils/all_utils.py
+      - config/config.yaml
+    outs:
+      - artifacts/reports_dir/graphs_dir/
 
   

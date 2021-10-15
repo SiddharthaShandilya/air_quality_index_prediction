@@ -25,12 +25,15 @@ stages:
       size: 1415058
       nfiles: 6
     - path: artifacts/raw_data/Html_Data
-      md5: 944e43a3a3e0f0bbb30bb1a33844a8fb.dir
+      md5: dc0e59e76bfa282cd526c5021de90dfb.dir
       size: 9863848
       nfiles: 72
     - path: config/config.yaml
-      md5: 0048c295aa47a3d5379de7c6112c1005
-      size: 829
+      md5: 7c1617c9122c5a23859865d36987fcca
+      size: 951
+    - path: src/stage_01_retrieve_html.py
+      md5: 82feff9d24d66029d8c5d0f8b0457121
+      size: 2171
     - path: src/stage_02_Extract_combine.py
       md5: 38f093769e04c9d1acb05e7c2d536496
       size: 6695
@@ -42,3 +45,41 @@ stages:
       md5: 06659508e55a7638ed8e079fc20a56fc.dir
       size: 97603
       nfiles: 7
+  FETCHING_DATA:
+    cmd: python src/stage_01_retrieve_html.py --config config/config.yaml
+    deps:
+    - path: config/config.yaml
+      md5: 7c1617c9122c5a23859865d36987fcca
+      size: 951
+    - path: src/stage_01_retrieve_html.py
+      md5: 82feff9d24d66029d8c5d0f8b0457121
+      size: 2171
+    - path: src/utils/all_utils.py
+      md5: 5818f5fceb1639ff03aa7a2ff9c36103
+      size: 1883
+    outs:
+    - path: artifacts/raw_data/Html_Data/
+      md5: dc0e59e76bfa282cd526c5021de90dfb.dir
+      size: 9863848
+      nfiles: 72
+  Exploratory_Data_Analysis:
+    cmd: python src/stage_03_EDA.py --config config/config.yaml
+    deps:
+    - path: artifacts/raw_data/Real-Data/
+      md5: 06659508e55a7638ed8e079fc20a56fc.dir
+      size: 97603
+      nfiles: 7
+    - path: config/config.yaml
+      md5: 7c1617c9122c5a23859865d36987fcca
+      size: 951
+    - path: src/stage_03_EDA.py
+      md5: c8ceddf1810d014bb9d0f6cbc5c9c0a7
+      size: 3655
+    - path: src/utils/all_utils.py
+      md5: 5818f5fceb1639ff03aa7a2ff9c36103
+      size: 1883
+    outs:
+    - path: artifacts/reports_dir/graphs_dir/
+      md5: da46ac7d1275c4034d42bd2ed3331c5c.dir
+      size: 34904
+      nfiles: 4
