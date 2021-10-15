@@ -148,3 +148,4 @@ artifacts/raw_data/Html_Data/
 artifacts/raw_data/Real-Data
 dummy_code
 artifacts/split_data_dir
+.dvc/tmp
