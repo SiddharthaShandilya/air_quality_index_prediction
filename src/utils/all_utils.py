@@ -4,6 +4,12 @@ import json
 import pandas as pd
 import matplotlib.pyplot as plt
 
+
+
+#-------------------------------------------------------------------------------
+#   read_yaml
+#-------------------------------------------------------------------------------
+
 def read_yaml(path_to_yaml: str) -> dict:
     with open(path_to_yaml) as yaml_file:
         content = yaml.safe_load(yaml_file)
@@ -11,16 +17,30 @@ def read_yaml(path_to_yaml: str) -> dict:
     return content
 
 
+
+#-------------------------------------------------------------------------------
+#   create_directory
+#-------------------------------------------------------------------------------
+
 def create_directory(dirs: list):
     for dir_path in dirs:
         os.makedirs(dir_path, exist_ok=True)
         print(f"directory is created at {dir_path}")
 
 
+#-------------------------------------------------------------------------------
+#   save_local_df
+#-------------------------------------------------------------------------------
+
 def save_local_df(data, data_path, index_status=False):
     data.to_csv(data_path, index=index_status)
     print(f"data is saved at {data_path}")
 
+
+
+#-------------------------------------------------------------------------------
+#   save_reports
+#-------------------------------------------------------------------------------
 
 def save_reports(report: dict, report_path: str, indentation=4):
     with open(report_path, "w") as f:
@@ -32,8 +52,6 @@ def save_reports(report: dict, report_path: str, indentation=4):
 #-------------------------------------------------------------------------------
 #   avg_data
 #-------------------------------------------------------------------------------
-
-
 
 def avg_data(aqi_data_dir_path,year):
     
@@ -62,6 +80,5 @@ def avg_data(aqi_data_dir_path,year):
         temp_i=temp_i+1
         average.append(avg)
 
-    
-
+        
     return average

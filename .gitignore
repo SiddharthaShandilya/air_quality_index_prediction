@@ -147,3 +147,4 @@ src/stage_02_aqt_data_processing.py
 artifacts/raw_data/Html_Data/
 artifacts/raw_data/Real-Data
 dummy_code
+artifacts/split_data_dir

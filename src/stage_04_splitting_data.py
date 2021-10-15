@@ -41,7 +41,28 @@ def split_data(config_path, params_path):
 
     if not os.path.exists("{}".format(test_data_file_path)):                                
         create_directory([os.path.join(artifacts_dir, split_data_dir, test_data_dir)])
-  
+
+    
+    # fetching parameters
+    split_ratio = params["split_data"]["test_size"]
+    random_state = params["split_data"]["random_state"]
+
+    df = pd.read_csv(real_data_combined_file_path)
+
+    train, test = train_test_split(df, test_size=split_ratio, random_state=random_state)
+
+    split_data_dir = config["artifacts"]["split_data"]["split_data_dir"]
+
+    create_directory([os.path.join(artifacts_dir, split_data_dir)])
+
+
+
+    
+    for data, data_path in (train, train_data_file_path), (test, test_data_file_path):
+        save_local_df(data, data_path)
+        #print( " {} created".format(data_path))
+
+    
 
 
 if __name__=="__main__":
@@ -52,4 +73,4 @@ if __name__=="__main__":
     parsed_args = args.parse_args()
     config_path=parsed_args.config
     
-    splitting_data(config_path=parsed_args.config, params_path=parsed_args.params)
+    split_data(config_path=parsed_args.config, params_path=parsed_args.params)
