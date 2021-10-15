@@ -1,10 +1,28 @@
 import os
-import time
+import time 
+import argparse
 import requests
 import sys
-from src.utils.all_utils import *
+from src.utils.all_utils import create_directory, read_yaml
 
-def retrieve_html():
+def retrieve_html(config_path):
+
+    config = read_yaml(config_path)
+
+    artifacts_dir = config["artifacts"]['artifacts_dir']
+    data_local_dir = config["artifacts"]['data_local_dir']
+    html_data_dir = config["artifacts"]['html_data_dir']
+
+    data_local_dir_path = os.path.join(artifacts_dir, data_local_dir)
+
+    create_directory(dirs= [data_local_dir_path])
+
+    html_local_dir_path = os.path.join(data_local_dir_path, html_data_dir)
+
+    print("#"*20 + " html_directory file path " + "#"*20)
+    print(html_local_dir_path)
+    print("#"*20 + " html_directory file path " + "#"*20)
+   
     
     #we are going to fetch every month's data from year 2103 to 2020
     for year in range(2013,2019):
@@ -19,22 +37,30 @@ def retrieve_html():
             text = requests.get(url)
             text_utf = text.text.encode('utf-8')
         
-            if not os.path.exists("artifacts/data/Html_Data/{}".format(year)):
+            if not os.path.exists("{}/{}".format(html_local_dir_path,year)):
                 
                         
-                os.makedirs("artifacts/data/Html_Data/{}".format(year))
+                os.makedirs("{}/{}".format(html_local_dir_path,year))
                 
-            with open("artifacts/data/Html_Data/{}/{}.html".format(year,month),"wb") as output:
+            with open("{}/{}/{}.html".format(html_local_dir_path,year,month),"wb") as output:
                 
                 output.write(text_utf)
 
-            print("artifacts/data/Html_Data {} / {} created".format( year, month))
+            print("{}/ {} / {} created".format(html_local_dir_path, year, month))
                   
     sys.stdout.flush()
     
 if __name__=="__main__":
 
+    args = argparse.ArgumentParser()
+
+    args.add_argument("--config", "-c", default="config/config.yaml")
+
+    parsed_args = args.parse_args()
+
     start_time=time.time()
-    retrieve_html()
+
+    retrieve_html(config_path=parsed_args.config)
+
     stop_time=time.time()
     print("time taken{}".format(stop_time-start_time))
