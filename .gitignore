@@ -144,6 +144,6 @@ src.egg-info
 
 
 src/stage_02_aqt_data_processing.py
-artifacts/data/Html_Data/
-artifacts/data/Real-Data
+artifacts/raw_data/Html_Data/
+artifacts/raw_data/Real-Data
 dummy_code

@@ -1,22 +1,24 @@
 stages:
   retrieve_html:
-    cmd: python src/stage_01_retrieve_html.py 
+    cmd: python src/stage_01_retrieve_html.py --config config/config.yaml
     deps:
       - src/stage_01_retrieve_html.py
       - src/utils/all_utils.py
       - config/config.yaml
       
     outs:
-      - artifacts/data/Html_Data/
+      - artifacts/raw_data/Html_Data/
 
   Extracting and combining data:
-    cmd: python src/stage_02_Extract_combine.py
+    cmd: python src/stage_02_Extract_combine.py --config config/config.yaml
     deps:
       - src/stage_02_Extract_combine.py
       - src/utils/all_utils.py
       - config/config.yaml
       #- artifacts/data/AQI/aqi2013.csv
-      - artifacts/data/AQI/
-      - artifacts/data/Html_Data
+      - artifacts/raw_data/AQI/
+      - artifacts/raw_data/Html_Data
     outs:
-      - artifacts/data/Real-Data/
+      - artifacts/raw_data/Real-Data/
+
+  

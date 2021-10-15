@@ -1,44 +1,44 @@
 schema: '2.0'
 stages:
   retrieve_html:
-    cmd: python src/stage_01_retrieve_html.py
+    cmd: python src/stage_01_retrieve_html.py --config config/config.yaml
     deps:
     - path: config/config.yaml
-      md5: 6fd49c05cb2c699fbcd604e5413d8c2f
-      size: 653
+      md5: 0048c295aa47a3d5379de7c6112c1005
+      size: 829
     - path: src/stage_01_retrieve_html.py
       md5: 31f2e2f799b79572452f5c9c17af7fb7
       size: 2174
     - path: src/utils/all_utils.py
-      md5: 6d2014117f6c3328aca019e7f4ec5179
-      size: 1863
+      md5: 5818f5fceb1639ff03aa7a2ff9c36103
+      size: 1883
     outs:
-    - path: artifacts/data/Html_Data/
-      md5: 7a07bb74788d636e6729d3608e1cc70a.dir
+    - path: artifacts/raw_data/Html_Data/
+      md5: 944e43a3a3e0f0bbb30bb1a33844a8fb.dir
       size: 9863848
       nfiles: 72
   Extracting and combining data:
-    cmd: python src/stage_02_Extract_combine.py
+    cmd: python src/stage_02_Extract_combine.py --config config/config.yaml
     deps:
-    - path: artifacts/data/AQI/
+    - path: artifacts/raw_data/AQI/
       md5: a2106931b548e5f3c31848138f32dda6.dir
       size: 1415058
       nfiles: 6
-    - path: artifacts/data/Html_Data
-      md5: 7a07bb74788d636e6729d3608e1cc70a.dir
+    - path: artifacts/raw_data/Html_Data
+      md5: 944e43a3a3e0f0bbb30bb1a33844a8fb.dir
       size: 9863848
       nfiles: 72
     - path: config/config.yaml
-      md5: 6fd49c05cb2c699fbcd604e5413d8c2f
-      size: 653
+      md5: 0048c295aa47a3d5379de7c6112c1005
+      size: 829
     - path: src/stage_02_Extract_combine.py
-      md5: 967fa92289dd1de7f5a50865d4ece34c
-      size: 6608
+      md5: 38f093769e04c9d1acb05e7c2d536496
+      size: 6695
     - path: src/utils/all_utils.py
-      md5: 6d2014117f6c3328aca019e7f4ec5179
-      size: 1863
+      md5: 5818f5fceb1639ff03aa7a2ff9c36103
+      size: 1883
     outs:
-    - path: artifacts/data/Real-Data/
+    - path: artifacts/raw_data/Real-Data/
       md5: 06659508e55a7638ed8e079fc20a56fc.dir
       size: 97603
       nfiles: 7

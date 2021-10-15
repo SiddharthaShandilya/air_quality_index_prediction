@@ -16,6 +16,7 @@ from bs4 import BeautifulSoup
 
 
 def met_data(html_local_dir_path,month, year):
+    print(" html_local_dir_path = {}".format(html_local_dir_path))
     file_html=open('{}/{}/{}.html'.format(html_local_dir_path,year,month),'rb')
     plain_text = file_html.read()
 
@@ -140,7 +141,7 @@ if __name__ == "__main__":
             temp = met_data(html_local_dir_path,month, year)         
             final_data = final_data + temp
         
-        pm = avg_data(year)
+        pm = avg_data(aqi_data_dir_path, year)
 
         if len(pm) == '364':
             pm.insert(364,'_')

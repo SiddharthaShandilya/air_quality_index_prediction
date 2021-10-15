@@ -35,11 +35,11 @@ def save_reports(report: dict, report_path: str, indentation=4):
 
 
 
-def avg_data(year):
+def avg_data(aqi_data_dir_path,year):
     
     temp_i=0
     average=[]
-    for rows in pd.read_csv("artifacts/data/AQI/aqi{}.csv".format(year), chunksize=24):
+    for rows in pd.read_csv("{}/aqi{}.csv".format(aqi_data_dir_path,year), chunksize=24):
 #    for rows in pd.read_csv("data/AQI/aqi2014.csv", chunksize=24):
 
         add_var=0
