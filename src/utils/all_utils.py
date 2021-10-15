@@ -2,8 +2,8 @@ import yaml
 import os
 import json
 import pandas as pd
-import matplotlib.pyplot as plt
-
+import numpy as np
+from sklearn import metrics
 
 
 #-------------------------------------------------------------------------------
@@ -15,6 +15,15 @@ def read_yaml(path_to_yaml: str) -> dict:
         content = yaml.safe_load(yaml_file)
 
     return content
+#-------------------------------------------------------------------------------
+#   error_value
+#-------------------------------------------------------------------------------
+
+def error_value(model, X_test, y_test):
+    prediction = model.predict(X_test)        
+    print('MAE:', metrics.mean_absolute_error(y_test, prediction))
+    print('MSE:', metrics.mean_squared_error(y_test, prediction))
+    print('RMSE:', np.sqrt(metrics.mean_squared_error(y_test, prediction)))
 
 
 

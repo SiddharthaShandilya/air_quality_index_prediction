@@ -74,3 +74,4 @@ if __name__=="__main__":
     config_path=parsed_args.config
     
     split_data(config_path=parsed_args.config, params_path=parsed_args.params)
+    

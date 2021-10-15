@@ -59,13 +59,17 @@ def eda(config_path):
     fig.savefig('{}/feat_importance.png'.format(graphs_dir_path))
     print(" # "*20 + " feature_importance graph created")
 
+    #-------------------------------------------------------------------------------
     # SNS_PAIRPLOT
+    #-------------------------------------------------------------------------------
     fig = plt.figure()
     sns.pairplot(df)
     fig.savefig('{}/sns_pairplot.png'.format(graphs_dir_path))
     print(" # "*20 + " SNS_PAIRPLOT GRAPH created")
 
+    #-------------------------------------------------------------------------------
     # SNS HEAT_MAP 
+    #-------------------------------------------------------------------------------
     fig = plt.figure()
     corr_mat = df.corr()
     top_corr_features = corr_mat.index
@@ -74,7 +78,10 @@ def eda(config_path):
     fig.savefig('{}/sns_heatmap.png'.format(graphs_dir_path))
     print(" # "*20 + " SNS HEAT_MAP  GRAPH created")
 
+    #-------------------------------------------------------------------------------
     # SNS_DISTPLOT
+    #-------------------------------------------------------------------------------
+    
     fig = plt.figure()
     sns.distplot(y)
     fig.savefig('{}/SNS_DISTPLOT(Y).png'.format(graphs_dir_path))
