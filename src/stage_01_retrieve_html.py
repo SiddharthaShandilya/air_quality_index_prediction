@@ -9,6 +9,9 @@ def retrieve_html(config_path):
 
     config = read_yaml(config_path)
 
+    site_name = config["Data"]['site_name']
+    city_code = config["Data"]['city_code']
+
     artifacts_dir = config["artifacts"]['artifacts_dir']
     data_local_dir = config["artifacts"]['data_local_dir']
     html_data_dir = config["artifacts"]['html_data_dir']
@@ -29,10 +32,10 @@ def retrieve_html(config_path):
         for month in range(1,13):
             
             if month<10:
-                url="https://en.tutiempo.net/climate/0{}-{}/ws-421820.html".format(month, year)
+                url="{}/0{}-{}/{}".format(site_name, month, year,city_code)
                 
             else:
-                 url="https://en.tutiempo.net/climate/{}-{}/ws-421820.html".format(month, year)
+                 url="{}/{}-{}/{}".format(site_name, month, year,city_code)
                  
             text = requests.get(url)
             text_utf = text.text.encode('utf-8')

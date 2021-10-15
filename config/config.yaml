@@ -1,5 +1,7 @@
 # all the locations of different directories will be here
-
+Data: 
+  site_name: https://en.tutiempo.net/climate
+  city_code: ws-421820.html
 artifacts: 
   artifacts_dir: artifacts
   data_local_dir: data
