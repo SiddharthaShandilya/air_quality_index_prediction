@@ -16,7 +16,7 @@ def split_data(config_path, params_path):
     train_data_dir = config["artifacts"]["split_data"]['train_data_dir'] # points to split_data folder inside artifacts/data
     test_data_dir = config["artifacts"]["split_data"]['test_data_dir'] # points to split_data folder inside artifacts/data
 
-    real_data_combined_file = config["artifacts"]['real_data_combined_file'] # points to  Real_Combine.csv 
+    real_data_combined_file = config["artifacts"]['cleaned_real_data_file'] # points to  Real_Combine.csv 
     train_data_file = config["artifacts"]["split_data"]['train_data_file'] 
     test_data_file = config["artifacts"]["split_data"]['test_data_file'] 
 

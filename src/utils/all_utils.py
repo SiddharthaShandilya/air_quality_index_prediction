@@ -4,6 +4,7 @@ import json
 import pandas as pd
 import numpy as np
 from sklearn import metrics
+import joblib
 
 
 #-------------------------------------------------------------------------------
@@ -25,8 +26,6 @@ def error_value(model, X_test, y_test):
     print('MSE:', metrics.mean_squared_error(y_test, prediction))
     print('RMSE:', np.sqrt(metrics.mean_squared_error(y_test, prediction)))
 
-
-
 #-------------------------------------------------------------------------------
 #   create_directory
 #-------------------------------------------------------------------------------
@@ -36,7 +35,6 @@ def create_directory(dirs: list):
         os.makedirs(dir_path, exist_ok=True)
         print(f"directory is created at {dir_path}")
 
-
 #-------------------------------------------------------------------------------
 #   save_local_df
 #-------------------------------------------------------------------------------
@@ -44,8 +42,6 @@ def create_directory(dirs: list):
 def save_local_df(data, data_path, index_status=False):
     data.to_csv(data_path, index=index_status)
     print(f"data is saved at {data_path}")
-
-
 
 #-------------------------------------------------------------------------------
 #   save_reports
@@ -55,8 +51,6 @@ def save_reports(report: dict, report_path: str, indentation=4):
     with open(report_path, "w") as f:
         json.dump(report, f, indent=indentation)
     print(f"reports are saved at {report_path}")
-
-
 
 #-------------------------------------------------------------------------------
 #   avg_data
@@ -91,3 +85,14 @@ def avg_data(aqi_data_dir_path,year):
 
         
     return average
+
+#-------------------------------------------------------------------------------
+#   Saving_model
+#-------------------------------------------------------------------------------
+
+def save_model(model_dir_path: list, model, model_filename):
+    
+    create_directory([model_dir_path])
+    model_path = os.path.join(model_dir_path, model_filename)
+    joblib.dump(model, model_path)
+    print(" {} save at {}".format(model_filename, model_dir_path ))

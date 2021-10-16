@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import argparse, os
-from src.utils.all_utils import create_directory, read_yaml
+from src.utils.all_utils import create_directory, read_yaml, save_local_df
 from sklearn.ensemble import ExtraTreesRegressor
 
 def eda(config_path):
@@ -13,6 +13,7 @@ def eda(config_path):
     data_local_dir = config["artifacts"]['data_local_dir'] # points to data folder inside artifacts
     real_data_dir = config["artifacts"]['real_data_dir'] # points to Real-Data folder inside artifacts/data
     real_data_combined_file = config["artifacts"]['real_data_combined_file'] # points to  Real_Combine.csv 
+    cleaned_real_data_file = config["artifacts"]['cleaned_real_data_file'] # points to  Real_Combine.csv 
 
     reports_dir = config["artifacts"]['reports']['reports_dir']
     graphs_dir = config["artifacts"]['reports']['graphs']['graphs_dir']
@@ -20,6 +21,8 @@ def eda(config_path):
 
 
     real_data_combined_file_path = os.path.join(artifacts_dir, data_local_dir, real_data_dir, real_data_combined_file)
+
+    cleaned_real_data_file_path = os.path.join(artifacts_dir, data_local_dir, real_data_dir, cleaned_real_data_file)
 
     #data = eda(real_data_combined_file_path)
     print(" real_data_combined_file_path = {}".format(real_data_combined_file_path))
@@ -87,7 +90,16 @@ def eda(config_path):
     fig.savefig('{}/SNS_DISTPLOT(Y).png'.format(graphs_dir_path))
     print(" # "*20 + "SNS_DISTPLOT(Y).png   created")
 
-    #return df   
+    #return df 
+    #-------------------------------------------------------------------------------
+    # SAVING THE DATA TO real_data_combined_file_path
+    #-------------------------------------------------------------------------------
+    print("----"*30)
+    save_local_df(df, cleaned_real_data_file_path)
+    print(" cleaned_real_data_file_path = {}".format(cleaned_real_data_file_path))
+    print("----"*30)
+
+
              
 
 
