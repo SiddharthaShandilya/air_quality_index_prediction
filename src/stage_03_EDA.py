@@ -13,7 +13,7 @@ def eda(config_path):
     data_local_dir = config["artifacts"]['data_local_dir'] # points to data folder inside artifacts
     real_data_dir = config["artifacts"]['real_data_dir'] # points to Real-Data folder inside artifacts/data
     real_data_combined_file = config["artifacts"]['real_data_combined_file'] # points to  Real_Combine.csv 
-    cleaned_real_data_file = config["artifacts"]['cleaned_real_data_file'] # points to  Real_Combine.csv 
+    cleaned_real_data_file = config["artifacts"]['cleaned_real_data_file'] # points to  cleaned_real_data_file.csv 
 
     reports_dir = config["artifacts"]['reports']['reports_dir']
     graphs_dir = config["artifacts"]['reports']['graphs']['graphs_dir']

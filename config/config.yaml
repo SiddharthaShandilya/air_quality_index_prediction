@@ -25,7 +25,7 @@ artifacts:
   model: 
     model_dir: trained_model
     decision_tree_reg: decision_tree_regression.pk1
-    lasso_reg: lasso_regression.pk1
+    lasso_reg: la sso_regression.pk1
     ridge_reg: ridge_regression.pk1
     linear_reg: linear_regression.pk1
     random_forest_reg: random_forest_regression.pk1
@@ -37,3 +37,4 @@ artifacts:
     
     graphs:
       graphs_dir: graphs_dir
+      trained_model_graph_dir: trained_model_graph_dir
