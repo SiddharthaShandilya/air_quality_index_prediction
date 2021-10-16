@@ -1,4 +1,4 @@
-from src.utils.all_utils import read_yaml, create_directory, save_local_df, error_value
+from src.utils.all_utils import read_yaml, create_directory, save_model, error_value
 import os, argparse
 import pandas as pd
 import numpy as np
@@ -14,23 +14,18 @@ def model_traininig(params, train_data_file_path):
     #--------------------------------------------------------------------------------------------------------
     #  ARRANGING DATA
     #--------------------------------------------------------------------------------------------------------
-
     df = pd.read_csv("{}".format(train_data_file_path))
     print(df.head(10))
-    df.dropna(inplace= True)
+    #df.dropna(inplace= True)
 
     X = df.iloc[:,:-1] # removing the last column
     y = df.iloc[:,-1]
-
-
-
     #--------------------------------------------------------------------------------------------------------
     #  FETCHING PARAMETERS
     #--------------------------------------------------------------------------------------------------------
     
     random_state = params["split_data"]["random_state"]
     test_size = params["split_data"]["test_size"]
-
     
     n_estimators = [int(x) for x in np.linspace(start = 100, stop = 1200, num = 12)]
     max_depth = [int(x) for x in np.linspace(5, 30, num = 6)]
@@ -39,7 +34,6 @@ def model_traininig(params, train_data_file_path):
     subsample = params["xg_boost"]["subsample"]
     min_child_weight = params["xg_boost"]["min_child_weight"]
 
-
     params = {'n_estimators': n_estimators,
                'learning_rate': learning_rate,
                'max_depth': max_depth,
@@ -47,16 +41,13 @@ def model_traininig(params, train_data_file_path):
                'min_child_weight': min_child_weight}
     
     #--------------------------------------------------------------------------------------------------------
-    #  MODEL TRAINING
+    #  MODEL TRAINING WITH RandomizedSearchCV  HYPER-PARAMETER TUNING
     #--------------------------------------------------------------------------------------------------------
-
     X_train, X_test, y_train , y_test = train_test_split(X, y, test_size=test_size, random_state=random_state)
-
-
     regressor = xgb.XGBRegressor()
-    regressor.fit(X_train, y_train)
-    prediction = regressor.predict(X_test)
-
+    #regressor.fit(X_train, y_train)
+    #prediction = regressor.predict(X_test)
+    
     xgb_random = RandomizedSearchCV(estimator= regressor,
         param_distributions= params ,
         n_iter=50,
@@ -66,8 +57,7 @@ def model_traininig(params, train_data_file_path):
         verbose=2,
         random_state=42)
 
-    xgb_random.fit(X_train,y_train)
-
+    xgb_random.fit(X_train,y_train) 
     #--------------------------------------------------------------------------------------------------------
     #  PRINTING SCORES AND ERRORS
     #--------------------------------------------------------------------------------------------------------
@@ -75,11 +65,23 @@ def model_traininig(params, train_data_file_path):
     print( " xgb_random.best_params_  = {}".format(xgb_random.best_params_))
     print( " xgb_random.best_score_  = {}".format(xgb_random.best_score_))
 
+     
+
     #print('MAE:', metrics.mean_absolute_error(y_test, prediction))
     #print('MSE:', metrics.mean_squared_error(y_test, prediction))
     #print('RMSE:', np.sqrt(metrics.mean_squared_error(y_test, prediction)))
 
+
+
     error_value(xgb_random, X_test, y_test)
+   
+    return xgb_random
+
+
+    
+
+
+
 
     
 
@@ -98,13 +100,26 @@ if __name__=="__main__":
     split_data_dir = config["artifacts"]["split_data"]["split_data_dir"]
     train_data_dir = config["artifacts"]["split_data"]["train_data_dir"]
     test_data_dir = config["artifacts"]["split_data"]["test_data_dir"]
+    model_dir = config["artifacts"]["model"]["model_dir"]
+    
+
+    model_dir_path = os.path.join(artifacts_dir, model_dir)
+    create_directory([model_dir_path])
 
     train_data_file = config["artifacts"]["split_data"]["train_data_file"]
     test_data_file = config["artifacts"]["split_data"]["test_data_file"]
+    saved_model_filename = config["artifacts"]["model"]["xgboost_reg"]
 
     train_data_file_path = os.path.join(artifacts_dir, split_data_dir,train_data_dir, train_data_file )
     test_data_file_path = os.path.join(artifacts_dir, split_data_dir, test_data_dir, test_data_file)
+    saved_model_file_path = os.path.join(artifacts_dir, model_dir, model_dir_path)
 
     
-    model_traininig(params, train_data_file_path)
+    model = model_traininig(params, train_data_file_path)
+    # saving model
+    save_model(model_dir_path, model, saved_model_filename)
+
+
+
+
     

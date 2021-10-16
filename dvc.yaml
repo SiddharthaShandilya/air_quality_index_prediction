@@ -20,27 +20,42 @@ stages:
       - artifacts/raw_data/AQI/
       - artifacts/raw_data/Html_Data
     outs:
-      - artifacts/raw_data/Real-Data/
+      - artifacts/raw_data/Real-Data/Real_Combine.csv
 
 
   Exploratory_Data_Analysis:
     cmd: python src/stage_03_EDA.py --config config/config.yaml
     deps:
       - src/stage_03_EDA.py
-      - artifacts/raw_data/Real-Data/
+      - artifacts/raw_data/Real-Data/Real_Combine.csv
       - src/utils/all_utils.py
       - config/config.yaml
     outs:
       - artifacts/reports_dir/graphs_dir/
+      - artifacts/raw_data/Real-Data/Cleaned_Real_Combined_data.csv
 
+  
+  
   Splitting_Data:
     cmd: python src/stage_04_splitting_data.py --config config/config.yaml --params params.yaml
     deps:
       - src/stage_04_splitting_data.py
-      - artifacts/raw_data/Real-Data/
+      - artifacts/raw_data/Real-Data/Cleaned_Real_Combined_data.csv
       - src/utils/all_utils.py
       - config/config.yaml
     outs:
       - artifacts/split_data_dir/
+
+  
+  
+  TRAINING_AND_GENERATING_MODEL:
+    cmd:  python src/stage_05_xgboost_regression.py  --config config/config.yaml --params params.yaml
+    deps:
+      - src/stage_05_xgboost_regression.py
+      - artifacts/split_data_dir/train_data_dir
+      - src/utils/all_utils.py
+      - config/config.yaml
+    outs:
+      - artifacts/trained_model/
 
   
