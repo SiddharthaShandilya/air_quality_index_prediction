@@ -43,6 +43,7 @@ stages:
       - artifacts/raw_data/Real-Data/Cleaned_Real_Combined_data.csv
       - src/utils/all_utils.py
       - config/config.yaml
+      - params.yaml
     outs:
       - artifacts/split_data_dir/
 
@@ -55,7 +56,20 @@ stages:
       - artifacts/split_data_dir/train_data_dir
       - src/utils/all_utils.py
       - config/config.yaml
+      - params.yaml
     outs:
       - artifacts/trained_model/
+
+
+  TESTING_AND_GENERATING_GRAPH:
+    cmd:  python src/stage_06_model_accuracy_testing.py   --config config/config.yaml 
+    deps:
+      - src/stage_06_model_accuracy_testing.py
+      - artifacts/split_data_dir/test_data_dir
+      - artifacts/trained_model/
+      - src/utils/all_utils.py
+      - config/config.yaml
+    outs:
+      - artifacts/reports_dir/trained_model_graph_dir
 
   
