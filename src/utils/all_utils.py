@@ -51,7 +51,14 @@ def save_reports(report: dict, report_path: str, indentation=4):
     with open(report_path, "w") as f:
         json.dump(report, f, indent=indentation)
     print(f"reports are saved at {report_path}")
-
+#-------------------------------------------------------------------------------
+#   fetch_reports
+#-------------------------------------------------------------------------------
+def fetch_reports(report_path: str):
+    with open(report_path, "w") as f:
+        report = json.load(f)
+    print(f"reports are loaded from {report_path}")
+    return report
 
 #-------------------------------------------------------------------------------
 #   Saving_model

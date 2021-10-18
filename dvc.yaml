@@ -59,6 +59,7 @@ stages:
       - params.yaml
     outs:
       - artifacts/trained_model/
+      - artifacts/reports_dir/scores.json
 
 
   TESTING_AND_GENERATING_GRAPH:
@@ -71,5 +72,16 @@ stages:
       - config/config.yaml
     outs:
       - artifacts/reports_dir/trained_model_graph_dir
+
+
+  LAUNCHING_WEB_APPLICATION:
+    cmd:  flask run 
+    deps:
+      - app.py
+      - artifacts/trained_model/
+      - templates/
+      - static/
+      - config/config.yaml
+    
 
   

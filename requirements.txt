@@ -1,11 +1,8 @@
-dvc
-pandas
-scikit-learn
+# local repo
+-e .
 
-# local packages -
--e 
 
-.absl-py @ file:///home/conda/feedstock_root/build_artifacts/absl-py_1633452298659/work
+absl-py @ file:///home/conda/feedstock_root/build_artifacts/absl-py_1633452298659/work
 aiobotocore==1.4.1
 aiohttp==3.7.4.post0
 aiohttp-retry==2.4.5
@@ -23,11 +20,12 @@ botocore==1.20.106
 Bottleneck @ file:///C:/ci/bottleneck_1607557040328/work
 brotlipy==0.7.0
 bs4==0.0.1
-certifi==2021.5.30
+certifi==2021.10.8
 cffi @ file:///C:/ci/cffi_1625831756778/work
 chardet==4.0.0
 charset-normalizer @ file:///tmp/build/80754af9/charset-normalizer_1630003229654/work
 clang==5.0
+click==8.0.3
 colorama @ file:///tmp/build/80754af9/colorama_1607707115595/work
 commonmark==0.9.1
 configobj==5.0.6
@@ -43,6 +41,8 @@ dpath==2.0.5
 dulwich==0.20.25
 dvc==2.7.4
 entrypoints==0.3
+Flask @ file:///tmp/build/80754af9/flask_1634118196080/work
+Flask-Cors==3.0.10
 flatbuffers==1.12
 flatten-dict==0.4.2
 flufl.lock==3.2
@@ -64,6 +64,7 @@ ipykernel @ file:///C:/ci/ipykernel_1629995228567/work/dist/ipykernel-6.2.0-py3-
 ipython @ file:///C:/ci/ipython_1632141520241/work
 ipython-genutils @ file:///tmp/build/80754af9/ipython_genutils_1606773439826/work
 ipywidgets @ file:///tmp/build/80754af9/ipywidgets_1610481889018/work
+itsdangerous @ file:///tmp/build/80754af9/itsdangerous_1621432558163/work
 jedi @ file:///C:/ci/jedi_1611341083684/work
 Jinja2 @ file:///tmp/build/80754af9/jinja2_1624781299557/work
 jmespath==0.10.0
@@ -153,7 +154,7 @@ six @ file:///tmp/build/80754af9/six_1623709665295/work
 sklearn==0.0
 smmap==4.0.0
 soupsieve @ file:///tmp/build/80754af9/soupsieve_1616183228191/work
--e git+https://github.com/SiddharthaShandilya/air_quality_index_prediction.git@8a928c619facc70823a4141b41340465d008513f#egg=src
+-e git+https://github.com/SiddharthaShandilya/air_quality_index_prediction.git@da6a91b1ea6821e9fa68610b566161c1a72e3e3f#egg=src
 tabulate==0.8.9
 tensorboard==2.6.0
 tensorflow==2.6.0
@@ -172,6 +173,7 @@ urllib3 @ file:///tmp/build/80754af9/urllib3_1625084269274/work
 voluptuous==0.12.2
 wcwidth @ file:///Users/ktietz/demo/mc3/conda-bld/wcwidth_1629357192024/work
 webencodings==0.5.1
+Werkzeug==2.0.2
 widgetsnbextension @ file:///C:/ci/widgetsnbextension_1607531582688/work
 win-inet-pton @ file:///C:/ci/win_inet_pton_1605306162074/work
 win-unicode-console==0.5
