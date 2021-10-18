@@ -20,6 +20,8 @@ def model_testing(model, test_data_file, graphs_dir_path):
     X = df.iloc[:,:-1] # removing the last column
     y = df.iloc[:,-1]
     #-----------------
+    X = X.values
+    y = y.values
     prediction = model.predict(X)
 
 
@@ -34,15 +36,6 @@ def model_testing(model, test_data_file, graphs_dir_path):
     print(" # "*20 + "SNS_DISTPLOT(Y).png   created")
 
     
-
-
-
-
-
-
-
-
-
 
 
 
