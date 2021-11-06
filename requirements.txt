@@ -1,7 +1,8 @@
 #local repository
--e.
+-e air_quality_index_prediction/.
 
 
+#-------------------------------------------------
 aiohttp==3.8.0
 aiohttp-retry==2.4.6
 aiosignal==1.2.0
