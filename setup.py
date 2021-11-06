@@ -17,6 +17,8 @@ setup(
     install_requires=[
         'dvc',
         'pandas',
+        "matplotlib",
+        "seaborn",
         'scikit-learn',
         'flask'
     ]
