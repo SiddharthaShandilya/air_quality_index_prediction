@@ -1,12 +1,12 @@
-FROM tensorflow/tensorflow:latest
-MAINTAINER siddharthashandilya104@gmail.com
+FROM python:latest
 RUN apt-get update
-RUN apt-get install -y git
+RUN python -m pip install --upgrade pip
+COPY . /aqt
+EXPOSE 5000
+WORKDIR /aqt
+RUN pip install -r requirements.txt
 
-RUN /usr/bin/python3 -m pip install --upgrade pip
-RUN git clone https://github.com/SiddharthaShandilya/air_quality_index_prediction.git
-#RUN echo
-RUN cd air_quality_index_prediction
-RUN pip install -r air_quality_index_prediction/requirements.txt
-
-
+RUN dvc dag | cat > dvc_dag_image.txt
+#RUN echo " dvc repro" > air_quality_index_prediction/dvc.sh
+RUN cat dvc_dag_image.txt
+RUN dvc repro dvc.yaml
