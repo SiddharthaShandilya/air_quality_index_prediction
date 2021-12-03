@@ -70,9 +70,9 @@ Man pages have been added. Checkout `man colorls`.
     *Note for `python` Please try to anaconda for running the app.*  
 
 4. Create a seperate virtual environment to avoid conflict between python libraries :
-    ```bash
+```bash
     python3 -m venv new-env 
-    ```
+```
 
 5. Activate the virtual env: 👉 [(click Here)](https://www.programshelp.com/help/python/activate_virtual_environment_python_windows_10.html)
 6. Install all the libraries for the application.
