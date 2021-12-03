@@ -6,6 +6,7 @@ stages:
       - src/utils/all_utils.py
       - config/config.yaml
       
+      
     outs:
       - artifacts/raw_data/Html_Data/
 
@@ -19,6 +20,7 @@ stages:
       #- artifacts/data/AQI/aqi2013.csv
       - artifacts/raw_data/AQI/
       - artifacts/raw_data/Html_Data
+      - requirements.txt      
     outs:
       - artifacts/raw_data/Real-Data/Real_Combine.csv
 
@@ -30,12 +32,11 @@ stages:
       - artifacts/raw_data/Real-Data/Real_Combine.csv
       - src/utils/all_utils.py
       - config/config.yaml
+      - requirements.txt
     outs:
       - artifacts/reports_dir/graphs_dir/
       - artifacts/raw_data/Real-Data/Cleaned_Real_Combined_data.csv
-
-  
-  
+    
   Splitting_Data:
     cmd: python src/stage_04_splitting_data.py --config config/config.yaml --params params.yaml
     deps:
@@ -43,12 +44,11 @@ stages:
       - artifacts/raw_data/Real-Data/Cleaned_Real_Combined_data.csv
       - src/utils/all_utils.py
       - config/config.yaml
+      - requirements.txt
       - params.yaml
     outs:
       - artifacts/split_data_dir/
-
-  
-  
+ 
   TRAINING_AND_GENERATING_MODEL:
     cmd:  python src/stage_05_xgboost_regression.py  --config config/config.yaml --params params.yaml
     deps:
@@ -56,6 +56,7 @@ stages:
       - artifacts/split_data_dir/train_data_dir
       - src/utils/all_utils.py
       - config/config.yaml
+      - requirements.txt
       - params.yaml
     outs:
       - artifacts/trained_model/
@@ -70,6 +71,7 @@ stages:
       - artifacts/trained_model/
       - src/utils/all_utils.py
       - config/config.yaml
+      - requirements.txt
     outs:
       - artifacts/reports_dir/trained_model_graph_dir
 
@@ -78,8 +80,8 @@ stages:
     cmd:  flask run 
     deps:
       - app.py
-      - artifacts/trained_model/
       - templates/
+      - artifacts/trained_model/
       - static/
       - config/config.yaml
     

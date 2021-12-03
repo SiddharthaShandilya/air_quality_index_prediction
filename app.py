@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request
 from flask_cors import cross_origin
-from src.utils.all_utils import read_yaml, create_directory, load_model, error_value
+from src.utils.all_utils import read_yaml, load_model
+import json
 import os
 import numpy as np
-import json
+
 
 #config_path="config/config.yaml"
 config = read_yaml("config/config.yaml")
@@ -32,8 +33,10 @@ def fetch_reports(report_path: str):
     print(f"reports are loaded from {report_path}")
     print(report)
     return report
-#-------------------------------------------------------------------------------
 
+#-------------------------------------------------------------------------------
+# AQT_PREDICT
+#-------------------------------------------------------------------------------
 
 @app.route("/aqt_predict",methods = ["GET", "POST"])
 def aqt_predict():

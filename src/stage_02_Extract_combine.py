@@ -24,7 +24,7 @@ def met_data(html_local_dir_path,month, year):
     tempd=[]
     finald=[]
     
-    soup = BeautifulSoup(plain_text,'lxml')
+    soup = BeautifulSoup(plain_text,'html.parser')
     
     for table in soup.findAll("table",{"class":"medias mensuales numspan"}):
         for tbody in table:
